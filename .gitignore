@@ -1,0 +1,4 @@
+fasterrcnn_resnet50_fpn.pth
+sample_script.py
+tmp/*
+venv/*
