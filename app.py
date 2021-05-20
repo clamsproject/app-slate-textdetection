@@ -31,6 +31,7 @@ class Slate_TD(ClamsApp):
                 "description": "This tool applies a custom Faster-RCNN model to slates specified in the input mmif.",
                 "vendor": "Team CLAMS",
                 "iri": f"http://mmif.clams.ai/apps/slate_td/{APP_VERSION}",
+                "app": f"http://mmif.clams.ai/apps/slate_td/{APP_VERSION}",
                 "requires": [DocumentTypes.VideoDocument.value, AnnotationTypes.TimeFrame.value],
                 # here timeframe is mandatory
                 "produces": [AnnotationTypes.BoundingBox.value]}
