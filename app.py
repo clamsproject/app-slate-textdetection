@@ -39,6 +39,7 @@ class Slate_TD(ClamsApp):
     def _annotate(self, mmif: Mmif, **kwargs) -> str:
         new_view = mmif.new_view()
         new_view.metadata['app'] = self.metadata["iri"]
+        new_view.new_contain(AnnotationTypes.BoundingBox.value)
         filename = mmif.get_document_location(DocumentTypes.VideoDocument)[7:]
         cap = cv2.VideoCapture(filename)
         file_basename = os.path.basename(filename)
