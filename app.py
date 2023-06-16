@@ -11,7 +11,7 @@ from mmif import Mmif, View, Annotation, Document, AnnotationTypes, DocumentType
 # App Imports
 import torch
 import torchvision
-from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
+from torchvision.models.detection.faster_rcnn import FastRCNNPredictor, FasterRCNN_ResNet50_FPN_Weights
 import numpy as np
 import cv2
 import traceback
@@ -24,15 +24,15 @@ logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(level
 class SlateTextDetection(ClamsApp):
 
     def __init__(self):
-        self.model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
+        self.model = torchvision.models.detection.fasterrcnn_resnet50_fpn(weights=FasterRCNN_ResNet50_FPN_Weights.DEFAULT)
         num_classes = 2
         in_features = self.model.roi_heads.box_predictor.cls_score.in_features
         self.model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
         self.model.load_state_dict(torch.load('fasterrcnn_resnet50_fpn.pth', map_location=torch.device('cpu')))  
         self.model.eval()
         self.model = self.model.float()
-        self.transforms = torch.transforms.Compose([
-            torchvision.transforms.Normalze(mean=[0.485, 0.456, 0.406],
+        self.transforms = torchvision.transforms.Compose([
+            torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                             std=[0.229, 0.224, 0.225]),
         ])
         logging.info("model loaded")
