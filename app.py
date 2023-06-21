@@ -52,7 +52,7 @@ class SlateTextDetection(ClamsApp):
         new_view = mmif_obj.new_view()
         config = self.get_configuration(**parameters)
         self.sign_view(new_view, config) 
-        new_view.new_contain(AnnotationTypes.BoundingBox.value)
+        new_view.new_contain(AnnotationTypes.BoundingBox)
         filename = mmif_obj.get_document_location(DocumentTypes.VideoDocument)[7:]
         logging.debug(f"running document with location {filename}")
         cap = cv2.VideoCapture(filename)
